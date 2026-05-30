@@ -57,12 +57,12 @@ src/
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/madatef/valsoft-case-study
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd valsoft-prototype
+   cd valsoft-case-study
    ```
 
 3. Install dependencies:
