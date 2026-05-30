@@ -16,6 +16,10 @@ This application presents a comprehensive analysis of potential AI features for 
 2. **F-03: Dynamic Slip Pricing Engine** - Fill every slip at the price the market will bear
 3. **F-08: Marina Performance Benchmark Platform** - Turn 1,000 marinas of data into a competitive advantage
 
+## Additional Resources
+
+4. **❓ Q&A Section** - 32 frequently asked questions covering feature selection, technical implementation, business cases, and go-to-market strategies
+
 ## Features
 
 - Interactive dashboard with three distinct views
@@ -34,6 +38,7 @@ src/
 │   ├── Main.jsx           # Main feature proposals view
 │   ├── DeepDive.jsx       # Technical implementation details
 │   ├── Reference.jsx      # Research references and sources
+│   ├── QnA.jsx            # Frequently asked questions
 │   ├── FeatureCard.jsx    # Feature display component
 │   ├── StatCard.jsx       # Statistical data display
 │   ├── StatPill.jsx       # Key metric indicators
@@ -93,7 +98,7 @@ npm run preview
 
 ## Navigation Guide
 
-The application features three primary navigation views accessible through the top navigation bar:
+The application features four primary navigation views accessible through the top navigation bar:
 
 1. **📊 Main View** - Overview of proposed AI features for DockMaster with business impact analysis:
    - Problem statements with supporting statistics
@@ -117,6 +122,13 @@ The application features three primary navigation views accessible through the t
    - Marina Management Software Market
    - RAG & AI Implementation
    - Revenue Intelligence & Benchmarking SaaS
+
+4. **❓ Q&A** - Frequently asked questions about the DockMaster AI feature analysis and implementation strategy:
+   - Feature selection rationale
+   - Technical implementation details
+   - Business case and pricing strategies
+   - Go-to-market approaches
+   - Risk assessment and mitigation strategies
 
 ## Development
 
