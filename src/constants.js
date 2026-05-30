@@ -718,21 +718,6 @@ export const referencesData = [
   },
   {
     id: 7,
-    category: "RAG & AI Implementation (Technical References for F-01 & F-08)",
-    resources: [
-      { title: "What is RAG (Retrieval-Augmented Generation) in AI? (Matillion)", url: "https://www.matillion.com/learn/blog/rag-retrieval-augmented-generation" },
-      { title: "What is RAG? — Retrieval-Augmented Generation AI Explained (AWS)", url: "https://aws.amazon.com/what-is/retrieval-augmented-generation/" },
-      { title: "What is retrieval-augmented generation (RAG)? (IBM)", url: "https://www.ibm.com/think/topics/retrieval-augmented-generation" },
-      { title: "What Is Retrieval Augmented Generation (RAG)? Detailed Guide (CyberNews)", url: "https://cybernews.com/ai-tools/retrieval-augmented-generation-rag/" },
-      { title: "A Complete Guide to Retrieval-Augmented Generation (Domo)", url: "https://www.domo.com/blog/a-complete-guide-to-retrieval-augmented-generation" },
-      { title: "What is retrieval-augmented generation (RAG)? (GitHub Resources)", url: "https://github.com/resources/articles/software-development-with-retrieval-augmentation-generation-rag" },
-      { title: "Agentic AI-Driven Technical Troubleshooting: A Novel Weighted RAG Paradigm (arXiv)", url: "https://arxiv.org/pdf/2412.12006" },
-      { title: "Cross-Format RAG in XR with LLMs for Context-Aware Maintenance Assistance (arXiv)", url: "https://arxiv.org/pdf/2502.15604" },
-      { title: "Doctor-RAG: Failure-Aware Repair for Agentic Retrieval-Augmented Generation (arXiv)", url: "https://arxiv.org/pdf/2604.00865" }
-    ]
-  },
-  {
-    id: 8,
     category: "Revenue Intelligence & Benchmarking SaaS — Pricing Comparables (F-08)",
     resources: [
       { title: "Best Revenue Intelligence Platforms in 2026: 10 Tools Compared (Tellius)", url: "https://www.tellius.com/resources/blog/best-revenue-intelligence-platforms-in-2026-clari-gong-tellius-7-more-compared" },
