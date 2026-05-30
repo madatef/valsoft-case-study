@@ -634,3 +634,114 @@ export const HONORABLE_MENTIONS = [
         summary: "Optimizes the forklift launch queue to minimize equipment travel time, account for tide windows, and eliminate scheduling conflicts before they cause delays on busy summer mornings.",
     },
 ];
+
+export const referencesData = [
+  {
+    id: 1,
+    category: "DockMaster Product Research",
+    resources: [
+      { title: "DockMaster homepage", url: "https://www.dockmaster.com/" },
+      { title: "DockMaster Marina Management solutions page", url: "https://www.dockmaster.com/solutions/marina-management" },
+      { title: "DockMaster Service Management solutions page", url: "https://www.dockmaster.com/solutions/service-management" },
+      { title: "DockMaster Web product page", url: "https://www.dockmaster.com/products/dockmaster-web" },
+      { title: "DockMaster BLU Voice Agent product page", url: "https://www.dockmaster.com/products/blu-voice-agent" },
+      { title: "DockMaster Case Studies", url: "https://www.dockmaster.com/case-studies" },
+      { title: "Prevent Revenue Leakage At Your Marina (DockMaster Blog)", url: "https://www.dockmaster.com/blog/prevent-revenue-leakage" },
+      { title: "Operational KPIs Every Marina Owner Should Track In 2026 (DockMaster Blog)", url: "https://www.dockmaster.com/blog/marina-kpis" },
+      { title: "How to Calculate Marina Occupancy Rates (DockMaster Blog)", url: "https://www.dockmaster.com/blog/marina-occupancy-rates" },
+      { title: "Marina Membership Vs. Daily Docking Fees (DockMaster Blog)", url: "https://www.dockmaster.com/blog/marina-membership" }
+    ]
+  },
+  {
+    id: 2,
+    category: "Marina Industry — General Operations & Benchmarks",
+    resources: [
+      { title: "Essential Marina Rules of Thumb & Ratios (DealStream)", url: "https://dealstream.com/industry-guides/marinas/rules-of-thumb" },
+      { title: "The Deceptive Marina Occupancy Rate (Marina Appraisal)", url: "http://www.marinaappraisal.com/the-deceptive-marina-occupancy-rate/" },
+      { title: "How to do a demand study of a marina project (Aninver Development Partners)", url: "https://aninver.com/blog/how-to-do-a-demand-study-of-a-marina-project" },
+      { title: "Top 10 Seasonal Boat Slip Markets: Pricing & Availability Trends (SlipMaps)", url: "https://www.slipmaps.com/2025/05/top-10-seasonal-boat-slip-markets.html" },
+      { title: "Wet Slip Pricing and Analytics: Why Occupancy is a Horrible Metric (Marina Dock Age)", url: "https://www.marinadockage.com/wet-slip-pricing-analytics-occupancy-horrible-metric/" }
+    ]
+  },
+  {
+    id: 3,
+    category: "Marine Labor Rates",
+    resources: [
+      { title: "Labor Rates — The Hull Truth Boating Forum", url: "https://www.thehulltruth.com/northeast/1145102-labor-rates-2.html" },
+      { title: "Average repair labor rate? — iboats Boating Forums", url: "https://forums.iboats.com/threads/average-repair-labor-rate.398587/ " },
+      { title: "Polling your Marina's hourly labor rates — Downeast Boat Forum", url: "https://downeastboatforum.com/threads/polling-your-marina%E2%80%99s-hourly-labor-rates.44206/" },
+      { title: "Mobile Marine Service labor rate page", url: "https://www.mobilemarineservice.net/4994.html" }
+    ]
+  },
+  {
+    id: 4,
+    category: "Auto Repair Industry — Service & Labor Benchmarks (Analogues for F-01)",
+    resources: [
+      { title: "Average Mechanic Labor Rate for Auto Repair Shops in 2026 (WickedFile)", url: "https://www.wickedfile.com/blogs/whats-the-right-labor-rate-for-my-auto-repair-shop-in-2026" },
+      { title: "What Auto Repair Shop Metrics (KPIs) to Track (Repair Shop Solutions)", url: "https://www.repairshopsolutions.com/about/what-auto-repair-shop-metrics-kpis-to-track/" },
+      { title: "6 Tips That Will Help You Reduce Your Auto Repair Shop's Comebacks (Elite Worldwide)", url: "https://eliteworldwide.com/info-center/6-tips-that-will-help-you-reduce-your-auto-repair-shops-comebacks/" },
+      { title: "Auto Repair Shop KPIs That Drive Real Profit (AutoFix / AutoShopCoaching)", url: "https://autoshopcoaching.com/auto-repair-shop-kpis-that-drive-real-profit/" },
+      { title: "Auto repair shop KPI guide with 5 essential metrics (BusinessPlanSuite)", url: "https://businessplansuite.com/blogs/metrics/auto-repair-shop" },
+      { title: "2026 Industry Statistics — Automotive Repair and Maintenance (AnythingResearch)", url: "https://www.anythingresearch.com/industry/Automotive-Repair-Maintenance.htm" },
+      { title: "Monitor Auto Shop Financial Health (Advanced Digital Group)", url: "https://autorepairseo.com/financial-health-check-key-metrics-every-auto-repair-shop-should-monitor/" },
+      { title: "4 Trends accelerating the auto repair industry forward (BBB Industry Hub)", url: "https://www.bbb.org/all/industry-hub/auto-repair" },
+      { title: "Hourly Rate for Industry: Marina (PayScale)", url: "https://www.payscale.com/research/US/Industry=Marina/Hourly_Rate" }
+    ]
+  },
+  {
+    id: 5,
+    category: "Dynamic Pricing — Hotel Industry Benchmarks (Analogues for F-03)",
+    resources: [
+      { title: "Dynamic Pricing for Hotels in 2026 — Industry Benchmarks (WISK)", url: "https://www.wisk.ai/blog/dynamic-pricing-for-hotels-in-2026-industry-benchmarks" },
+      { title: "Dynamic Pricing vs Fixed Pricing: Which Wins for Hotels? (PriceLabs)", url: "https://hello.pricelabs.co/blog/dynamic-pricing-vs-fixed-pricing-hotels/" },
+      { title: "7 Hotel Dynamic Pricing Success Metrics: Boost Your RevPAR (PriceLabs)", url: "https://hello.pricelabs.co/blog/metrics-to-track-hotel-dynamic-pricing/" },
+      { title: "Hotel Pricing Strategies: 8 Proven Revenue Manager Tactics (PriceLabs)", url: "https://hello.pricelabs.co/blog/hotel-pricing-strategies/" },
+      { title: "Hotel Dynamic Pricing: Strategies to Increase Revenue (Mews)", url: "https://www.mews.com/en/blog/dynamic-pricing-hotels" },
+      { title: "The complete guide to dynamic pricing in the hotel industry (Hospitality Net)", url: "https://www.hospitalitynet.org/explainer/4131229/the-complete-guide-to-dynamic-pricing-in-the-hotel-industry" },
+      { title: "Hotel Dynamic Pricing: The Complete Guide for Hoteliers (Cvent)", url: "https://www.cvent.com/en/blog/hospitality/hotel-dynamic-pricing-complete-guide" },
+      { title: "How Dynamic Pricing Can Improve Hotel Revenue (NetSuite)", url: "https://www.netsuite.com/portal/resource/articles/business-strategy/hotel-dynamic-pricing.shtml" },
+      { title: "Increase your hotel revenue with dynamic pricing (HappyHotel)", url: "https://www.happyhotel.io/en/dynamic-pricing" }
+    ]
+  },
+  {
+    id: 6,
+    category: "Marina Management Software Market & Competitors",
+    resources: [
+      { title: "Best Marina Management Software of 2025 (SourceForge)", url: "https://sourceforge.net/software/marina-management/" },
+      { title: "Best Marina Management Software in 2026 (Slashdot)", url: "https://slashdot.org/software/marina-management/" },
+      { title: "Top Rated Marine Software with Price/Margin Management 2026 (GetApp)", url: "https://www.getapp.com/industries-software/marine/f/price-management/" },
+      { title: "Marina Management Software Market Size, Share, Growth — CAGR Forecast 2032 (Future Market Report)", url: "https://www.futuremarketreport.com/industry-report/marina-management-software-market" },
+      { title: "Marine And Marine Management Software Market Industry Report 2034 (Polaris Market Research)", url: "https://www.polarismarketresearch.com/industry-analysis/marine-management-software-market" },
+      { title: "Best Marine Software of 2026 (SourceForge)", url: "https://sourceforge.net/software/marine/" },
+      { title: "Sirius Software — Marina System Pricing, Alternatives & More 2026 (Capterra)", url: "https://www.capterra.com/p/160328/Marina-Module/reviews/" }
+    ]
+  },
+  {
+    id: 7,
+    category: "RAG & AI Implementation (Technical References for F-01 & F-08)",
+    resources: [
+      { title: "What is RAG (Retrieval-Augmented Generation) in AI? (Matillion)", url: "https://www.matillion.com/learn/blog/rag-retrieval-augmented-generation" },
+      { title: "What is RAG? — Retrieval-Augmented Generation AI Explained (AWS)", url: "https://aws.amazon.com/what-is/retrieval-augmented-generation/" },
+      { title: "What is retrieval-augmented generation (RAG)? (IBM)", url: "https://www.ibm.com/think/topics/retrieval-augmented-generation" },
+      { title: "What Is Retrieval Augmented Generation (RAG)? Detailed Guide (CyberNews)", url: "https://cybernews.com/ai-tools/retrieval-augmented-generation-rag/" },
+      { title: "A Complete Guide to Retrieval-Augmented Generation (Domo)", url: "https://www.domo.com/blog/a-complete-guide-to-retrieval-augmented-generation" },
+      { title: "What is retrieval-augmented generation (RAG)? (GitHub Resources)", url: "https://github.com/resources/articles/software-development-with-retrieval-augmentation-generation-rag" },
+      { title: "Agentic AI-Driven Technical Troubleshooting: A Novel Weighted RAG Paradigm (arXiv)", url: "https://arxiv.org/pdf/2412.12006" },
+      { title: "Cross-Format RAG in XR with LLMs for Context-Aware Maintenance Assistance (arXiv)", url: "https://arxiv.org/pdf/2502.15604" },
+      { title: "Doctor-RAG: Failure-Aware Repair for Agentic Retrieval-Augmented Generation (arXiv)", url: "https://arxiv.org/pdf/2604.00865" }
+    ]
+  },
+  {
+    id: 8,
+    category: "Revenue Intelligence & Benchmarking SaaS — Pricing Comparables (F-08)",
+    resources: [
+      { title: "Best Revenue Intelligence Platforms in 2026: 10 Tools Compared (Tellius)", url: "https://www.tellius.com/resources/blog/best-revenue-intelligence-platforms-in-2026-clari-gong-tellius-7-more-compared" },
+      { title: "15 best revenue intelligence platforms in 2026 (Guideflow)", url: "https://www.guideflow.com/blog/best-revenue-intelligence-platforms" },
+      { title: "10 Best Revenue Intelligence Tools for 2026 (ZoomInfo Pipeline)", url: "https://pipeline.zoominfo.com/sales/revenue-intelligence-tools" },
+      { title: "Revenue Intelligence Platforms: A Buyer's Guide (Salesmotion)", url: "https://salesmotion.io/blog/revenue-intelligence-platform-guide" },
+      { title: "5 Best Revenue Intelligence Platforms For SaaS Companies In 2026 (SaaSGrid)", url: "https://www.saasgrid.com/post/5-best-revenue-intelligence-software-for-saas-companies" },
+      { title: "15 SaaS Reporting Tools Ranked by Price & Features (DesignRevision)", url: "https://designrevision.com/blog/saas-reporting-tools" },
+      { title: "Don't Buy Revenue Intelligence Platform Before Reading This (MaxIQ)", url: "https://www.getmaxiq.com/blog/best-revenue-intelligence-platforms" }
+    ]
+  }
+];
