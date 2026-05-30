@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Main from './components/Main'
 import DeepDive from './components/DeepDive'
 import Reference from './components/Reference'
+import QnA from './components/QnA'
 
 
 function App() {
@@ -95,12 +96,31 @@ function App() {
           >
             📚 References
           </button>
+          <button
+            onClick={() => setPage('qna')}
+            style={{
+              background: page === 'qna' ? "rgba(245, 158, 11, 0.15)" : "rgba(255,255,255,0.03)",
+              border: `1px solid ${page === 'qna' ? "rgba(245, 158, 11, 0.4)" : "rgba(255,255,255,0.07)"}`,
+              borderRadius: 8,
+              padding: "8px 16px",
+              cursor: "pointer",
+              fontSize: 12,
+              fontWeight: 700,
+              color: page === 'qna' ? "#F59E0B" : "#475569",
+              transition: "all 0.2s",
+            }}
+          >
+            ❓ Q&A
+          </button>
         </div>
       </div>
 
       {/* Page Content */}
       <div style={{ height: "calc(100vh - 73px)" }}>
-        {page === 'main' ? <Main /> : page === 'deepdive' ? <DeepDive /> : <Reference />}
+        {page === 'main' ? <Main /> :
+         page === 'deepdive' ? <DeepDive /> :
+         page === 'reference' ? <Reference /> :
+         <QnA />}
       </div>
     </div>
   )
