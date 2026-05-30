@@ -730,3 +730,166 @@ export const referencesData = [
     ]
   }
 ];
+
+export const qnaData = [
+  {
+    id: 1,
+    question: "Why did you choose these 3 features out of the 10 opportunities you identified?",
+    answer: "I intentionally chose three opportunities operating at different layers of value creation. F-01 improves operational execution inside an existing workflow. F-03 directly increases customer revenue. F-08 creates a defensible network-data advantage. I optimized for a portfolio balance: near-term ROI, medium-term monetization, long-term moat. I also selected opportunities that leverage DockMaster's existing assets: historical work orders, reservation data, and installed customer footprint."
+  },
+  {
+    id: 2,
+    question: "If DockMaster could only build ONE feature first, which would you prioritize and why?",
+    answer: "I would start with F-01 AI Work Order Assistant. Reasons: 1. Strongest fit with existing workflow. 2. Uses proprietary data DockMaster already owns. 3. Clear measurable ROI. 4. Moderate implementation complexity. 5. Faster path to adoption. It solves a daily pain point for service writers and produces visible time savings quickly."
+  },
+  {
+    id: 3,
+    question: "Which feature has the strongest business case?",
+    answer: "Short-term: F-01. The strongest business case combines: high-frequency usage, clear ROI, low behavior change, manageable complexity. F-01 scores highly on all four."
+  },
+  {
+    id: 4,
+    question: "Which feature creates the strongest long-term moat?",
+    answer: "F-08 Marina Performance Benchmark Platform. The moat is not the model. The moat is the network dataset. Every additional customer improves benchmark quality. Competitors without DockMaster's customer footprint cannot reproduce that advantage quickly."
+  },
+  {
+    id: 5,
+    question: "How do your proposed features align with DockMaster's existing product direction?",
+    answer: "I intentionally avoided disconnected \"AI gimmicks.\" Each feature extends existing DockMaster modules. F-01 extends service operations. F-03 extends reservations and billing. F-08 extends reporting and analytics. This is AI embedded into existing workflows, not unrelated AI tooling."
+  },
+  {
+    id: 6,
+    question: "How did you validate these customer problems?",
+    answer: "I triangulated across: DockMaster's existing product footprint, adjacent industry benchmarks, workflow similarity analysis. Marine-specific public data is limited, so I used analog industries where operational workflows are highly comparable."
+  },
+  {
+    id: 7,
+    question: "Why did you use auto repair and hotel analogies?",
+    answer: "Because the operational mechanics are very similar. Marine repair: complaint → diagnosis → labor estimate → parts → work order. Auto repair: same workflow. Transient slips: fixed inventory + fluctuating demand + time-sensitive capacity. Hotels operate on essentially the same pricing dynamics."
+  },
+  {
+    id: 8,
+    question: "How confident are you in your assumptions and benchmarks?",
+    answer: "Moderately confident. I would position them as directionally validated assumptions, not immutable facts. Before committing to development, I would validate them through customer interviews and analysis of anonymized DockMaster data."
+  },
+  {
+    id: 9,
+    question: "Who is the buyer for each product?",
+    answer: "F-01: Service directors, operations leaders. F-03: General managers, owners, revenue decision makers. F-08: Executive leadership, multi-location operators."
+  },
+  {
+    id: 10,
+    question: "Who is the daily user of each feature?",
+    answer: "F-01: Service writers, advisors, coordinators. F-03: Reservation managers, marina managers. F-08: Leadership teams and operators."
+  },
+  {
+    id: 11,
+    question: "Why RAG instead of training a custom model?",
+    answer: "Because the problem is primarily context retrieval, not missing language capability. The knowledge already exists in historical work orders. RAG is: faster, cheaper, easier to maintain, easier to update. Training a custom foundation model would be unnecessary for an MVP."
+  },
+  {
+    id: 12,
+    question: "What are the biggest technical risks in F-01?",
+    answer: "The main risks are: 1. Messy historical data. 2. Inconsistent technician notes. 3. Retrieval quality. The challenge is data engineering and grounding, not LLM capability."
+  },
+  {
+    id: 13,
+    question: "How would you prevent hallucinations in the Work Order Assistant?",
+    answer: "Several safeguards: retrieval grounded in historical records, make/model/year filtering, structured outputs, confidence scoring, mandatory human review. The system should recommend, not autonomously diagnose."
+  },
+  {
+    id: 14,
+    question: "Why Prophet/XGBoost for Dynamic Pricing?",
+    answer: "They solve complementary forecasting problems. Prophet handles seasonality well. XGBoost performs strongly with nonlinear feature interactions. An ensemble approach is practical and production-proven."
+  },
+  {
+    id: 15,
+    question: "How would you handle cold start for marinas with limited history?",
+    answer: "Three approaches: 1. Regional priors. 2. Similar-marina pattern borrowing. 3. Recommendation mode before automation. The system can rely more heavily on global signals until local data accumulates."
+  },
+  {
+    id: 16,
+    question: "Why is F-08 high complexity?",
+    answer: "Because the complexity comes primarily from: privacy architecture, data normalization, segmentation quality, governance requirements. Not from advanced AI modeling."
+  },
+  {
+    id: 17,
+    question: "How would you implement privacy protections?",
+    answer: "I would use layered controls: anonymization, cohort thresholds, k-anonymity, differential privacy, strict access control, explicit contractual consent. Trust is mission-critical."
+  },
+  {
+    id: 18,
+    question: "Why not integrate existing AI vendors?",
+    answer: "General AI vendors lack: marine-specific context, DockMaster-native integration, proprietary operational history. The strategic value comes from DockMaster's own data assets."
+  },
+  {
+    id: 19,
+    question: "How did you determine pricing?",
+    answer: "I used value-based pricing anchored to: expected customer ROI, adjacent SaaS market benchmarks, willingness-to-pay logic. The pricing question was: \"What fraction of created value can DockMaster capture while preserving obvious customer ROI?\""
+  },
+  {
+    id: 20,
+    question: "Why would customers pay extra instead of expecting AI inside the core platform?",
+    answer: "Because these are outcome-driven capabilities. They produce measurable business value: recovered labor revenue, pricing optimization, strategic intelligence. Premium outcomes support premium monetization."
+  },
+  {
+    id: 21,
+    question: "Which GTM strategy would you launch first?",
+    answer: "Pilot-first GTM. 5--10 design partners. Measure before/after impact. Generate proof points. Turn those results into customer stories and rollout assets."
+  },
+  {
+    id: 22,
+    question: "How would you pilot these products?",
+    answer: "Small customer cohort. High-engagement customers. Clear KPI measurement. Tight feedback cycles. The priority is learning velocity before aggressive monetization."
+  },
+  {
+    id: 23,
+    question: "How would you measure success after launch?",
+    answer: "F-01: estimate creation time, edit rate, adoption, recovered revenue. F-03: forecast accuracy, pricing acceptance, revenue uplift. F-08: engagement, renewals, expansion revenue."
+  },
+  {
+    id: 24,
+    question: "How would you drive customer trust in AI recommendations?",
+    answer: "Human-in-the-loop design. Explainability. Recommendation-first rollout. Trust should be earned before automation."
+  },
+  {
+    id: 25,
+    question: "What if operators resist automation?",
+    answer: "That resistance is expected. Adoption should be staged: observe → approve → partially automate → autopilot. Customers control progression."
+  },
+  {
+    id: 26,
+    question: "What if recommendations are wrong?",
+    answer: "Design for safe failure. Override capability, human review, feedback capture, continuous tuning. Failures should not disrupt operations."
+  },
+  {
+    id: 27,
+    question: "How do you avoid overwhelming users with AI?",
+    answer: "Embed AI inside existing workflows. No separate \"AI dashboard.\" Deliver contextual guidance at the exact decision point."
+  },
+  {
+    id: 28,
+    question: "What is your 12‑month roadmap?",
+    answer: "Months 1--3: F‑01 MVP. Months 4--6: pilot and iteration. Months 7--9: F‑03 pilot. Months 10--12: F‑08 foundational work. I would sequence by implementation risk and ROI speed."
+  },
+  {
+    id: 29,
+    question: "What belongs in MVP versus later phases?",
+    answer: "Example --- F‑01. MVP: complaint intake → retrieval → estimate suggestion. Later phases: learning loops, cross-location intelligence, advanced diagnostics."
+  },
+  {
+    id: 30,
+    question: "What would make these projects fail?",
+    answer: "Three primary failure modes: 1. Poor data quality. 2. Low customer trust. 3. Weak ROI measurement. AI products fail quickly when outputs are unreliable or value is ambiguous."
+  },
+  {
+    id: 31,
+    question: "What assumptions would you test immediately?",
+    answer: "1. Pain severity. 2. Customer willingness to pay. 3. Historical data quality. 4. Trust in recommendation workflows."
+  },
+  {
+    id: 32,
+    question: "What did you learn from this case study?",
+    answer: "The strongest lesson was that successful vertical AI is less about model novelty and more about: proprietary data, workflow integration, measurable business outcomes, defensible distribution. The best opportunities leveraged DockMaster's existing data assets rather than inventing entirely new workflows."
+  }
+];
