@@ -108,6 +108,7 @@ function App() {
               fontWeight: 700,
               color: page === 'qna' ? "#F59E0B" : "#475569",
               transition: "all 0.2s",
+              display: none,
             }}
           >
             ❓ Q&A
