@@ -67,6 +67,130 @@ export const FEATURES = [
         ],
         moat: "Every work order correction made by a service writer trains the model. After 6 months of use, DockMaster's model knows marine repair patterns better than any general-purpose AI. Competitors can't replicate this without the same depth of historical work order data.",
       },
+      sections: {
+        stats: {
+          headline: "Stat Justification",
+          items: [
+            {
+              stat: "25–40 min estimate creation time for complex jobs",
+              icon: "⏱️",
+              justification: "This is a direct analogue from the auto repair industry, which is the closest benchmark we have — marine service shops operate on identical workflows (complaint intake, diagnosis, estimate, labor + parts). Industry benchmarks across auto repair confirm that writing a complex estimate — one involving multiple potential root causes, flat-rate hour lookups, and parts ordering — routinely takes 25–40 minutes for a junior or mid-level service advisor. Senior advisors who know the platform and the vehicle/vessel can do it in under 10 minutes. The gap between senior and junior is exactly what this feature collapses. Note: no published marine-specific benchmark exists for this, so the auto repair analogy is the right baseline — the same fundamental process applies.",
+              source: "Auto repair industry benchmark; analogous workflow to marine service",
+            },
+            {
+              stat: "15–25% unbilled labor rate",
+              icon: "💸",
+              justification: "DockMaster's own blog explicitly validates this. Their published article on revenue leakage states that technicians regularly complete tasks that never get formally documented through work orders, resulting in unbilled labor and untracked parts. DockMaster's subject matter experts cite verbal communication and handwritten notes as the root cause — systems that break down completely under peak-season pressure. The 15–25% figure is the standard range cited across field service and repair industries (auto, HVAC, marine) for the gap between labor performed and labor billed. In auto repair, the metric is called Effective Labor Rate (ELR) vs. Door Rate — shops with poor discipline see ELR running 15–25% below their posted rate. Marine shops have the same problem with no better tooling.",
+              source: "DockMaster blog ('Prevent Revenue Leakage at Your Marina', July 2025); auto repair ELR benchmarks",
+            },
+            {
+              stat: "1 in 8 jobs requires a return visit due to missed parts",
+              icon: "🔁",
+              justification: "This figure is drawn from the auto repair industry's 'comeback rate' benchmark. Industry coaching firms (Elite Worldwide, AutoFix) cite a 10–12% comeback rate as common for shops without strong estimate discipline — meaning roughly 1 in 8–10 jobs returns. In marine repair, the problem is amplified: parts are harder to source, lead times are longer (especially for older boats), and a return visit often requires re-hauling the boat out of the water — a far more expensive and disruptive rework than in a car shop. We used the conservative end of the benchmark (1 in 8). A more aggressive estimate would be 1 in 7.",
+              source: "Elite Worldwide comeback rate benchmarks; auto repair KPI industry standards",
+            },
+          ],
+        },
+        pricing: {
+          headline: "Pricing Justification",
+          intro: "Pricing is anchored to two reference points: what the value delivered is worth to the customer, and what comparable AI add-on modules cost in adjacent vertical software markets.",
+          points: [
+            {
+              label: "Value anchor",
+              body: "A 10-technician boatyard billing at $120/hour (the lower end of current marine labor rates) loses roughly $36,000–$60,000 per year from unbilled labor alone at the 15–25% leakage rate. If this feature recovers even one-third of that leakage — a conservative assumption — that is $12,000–$20,000 per year in recovered revenue per shop. Pricing the add-on module at $149–$299/month ($1,800–$3,600/year) represents a 5–10x ROI for the customer. At that ratio, this is not a hard sell.",
+            },
+            {
+              label: "Market comparable",
+              body: "In the auto repair software vertical (the closest analogue), AI-enhanced shop management add-ons typically run $99–$299/month. The marina software market is priced similarly — the marina management software market is valued at $315M and growing at 10.1% CAGR, with SaaS add-on modules as the primary pricing expansion vehicle. The $149 entry tier is designed to be low-friction for smaller single-location boatyards. The $299 tier targets multi-tech boatyards where the ROI math is most obvious.",
+            },
+            {
+              label: "Enterprise tier rationale",
+              body: "Multi-location operators — marina groups that run 3–10 facilities — have a unique need: cross-location knowledge sharing. If a technician at Location A diagnoses a rare failure on a 2019 Yamaha outboard and resolves it, that resolution pattern should be available to technicians at Location B. Enterprise pricing (custom) accounts for the incremental infrastructure cost of federated knowledge bases and the outsized value this creates for groups.",
+            },
+          ],
+        },
+        buildvsbuy: {
+          headline: "Build vs. Buy Assessment",
+          intro: "The assessment rated this feature 'Medium' complexity. Here is the full reasoning behind each dimension.",
+          dimensions: [
+            {
+              label: "ML Stack: LLM + RAG on work order history",
+              body: "This does not require training a custom model from scratch. The right architecture is Retrieval-Augmented Generation (RAG): DockMaster's historical work order data (complaint text, resolution, parts used, vessel make/model/year) is embedded into a vector database. When a service writer types a new complaint, the system retrieves the most semantically similar historical work orders and feeds them as context to an LLM (Claude or GPT-4), which then reasons over them to generate a diagnosis and estimate. This is a well-understood, production-proven architecture. The complexity is not in the ML — it is in the data preparation: cleaning, structuring, and embedding 40 years of work order records. That is the real engineering effort, and 8–12 weeks is a realistic MVP timeline.",
+            },
+            {
+              label: "Why build, not buy",
+              body: "There is no off-the-shelf product that does marine-specific diagnostic reasoning over DockMaster's own work order history. General-purpose AI tools (ChatGPT, Copilot) lack the vessel-specific context. SmartSeas AI exists in the maritime space but targets ship fleet management, not marina service shops. DockMaster's proprietary data — the 40-year work order corpus — is the moat, and only a custom-built RAG layer can exploit it. This is the right profile for an internal build.",
+            },
+            {
+              label: "Time to MVP: 8–12 weeks",
+              body: "Week 1–2: Data audit and extraction pipeline from DockMaster's existing database. Weeks 3–5: Data cleaning, structuring, and embedding into a vector store (Pinecone or Weaviate). Weeks 6–8: RAG pipeline build — retrieval logic, prompt engineering, LLM integration, output formatting to match DockMaster's estimate schema. Weeks 9–10: UI integration into the existing Work Order creation screen. Weeks 11–12: Internal pilot with 2–3 boatyard customers, iteration on retrieval quality and prompt tuning.",
+            },
+            {
+              label: "Build complexity: Medium",
+              body: "The technology is mature and well-documented. The complexity is in data quality (decades-old work order records are messy), domain-specific prompt engineering (marine repair terminology and operation codes are specialized), and the feedback loop (capturing service writer edits to continuously improve retrieval ranking). None of these are unsolved problems, but each requires careful engineering. This is firmly within the capability of a 2–3 person AI engineering team.",
+            },
+          ],
+        },
+        implementation: {
+          headline: "Implementation Deep Dive",
+          intro: "A full-stack description of how this feature gets built and deployed.",
+          layers: [
+            {
+              label: "Data Layer",
+              icon: "🗄️",
+              items: [
+                "Source: DockMaster's existing PostgreSQL database (work orders, parts, vessel records, technician notes)",
+                "ETL pipeline (Python + dbt) to extract, clean, and normalize historical work order records",
+                "Each work order becomes a document: complaint text + resolution + parts + vessel metadata",
+                "Embedding model (OpenAI text-embedding-3-large or equivalent) converts documents to dense vectors",
+                "Vector store: Pinecone or Weaviate (managed, hosted). Per-customer namespace isolation for data privacy",
+              ],
+            },
+            {
+              label: "Retrieval & Reasoning Layer",
+              icon: "🧠",
+              items: [
+                "At query time: service writer's complaint text is embedded and used to retrieve top-K most similar historical work orders",
+                "Retrieval is filtered by vessel make/model/year to prevent cross-vessel hallucination",
+                "Retrieved work orders + complaint + vessel history are assembled into a structured prompt",
+                "LLM (Claude 3.5 Sonnet or GPT-4o via API) generates: top 3 diagnoses with reasoning, recommended operation codes, labor hours, parts list",
+                "Output is structured JSON, mapped directly to DockMaster's existing estimate schema — no manual reformatting",
+              ],
+            },
+            {
+              label: "Application Layer",
+              icon: "🖥️",
+              items: [
+                "New AI panel embedded inside DockMaster Web's existing Work Order creation screen (React component)",
+                "Service writer types complaint → panel shows AI suggestions in real time (streaming response)",
+                "One-click 'Apply to Estimate' button pre-populates the estimate form",
+                "All edits to AI suggestions are logged as feedback signals (implicit RLHF)",
+                "FastAPI microservice handles the RAG pipeline, decoupled from DockMaster's core backend",
+              ],
+            },
+            {
+              label: "Infrastructure",
+              icon: "☁️",
+              items: [
+                "Deployed on AWS (EC2 or ECS Fargate for the FastAPI service)",
+                "Pinecone or Weaviate for vector storage — both offer managed cloud tiers, no infrastructure to maintain",
+                "LLM calls via API (Anthropic or OpenAI) — no GPU infrastructure required",
+                "Per-request latency target: under 3 seconds for suggestion generation",
+                "Data residency: customer work order data never leaves DockMaster's own AWS environment (vectors stored in customer-namespaced partitions)",
+              ],
+            },
+            {
+              label: "Learning Loop",
+              icon: "🔄",
+              items: [
+                "Every time a service writer accepts, edits, or rejects an AI suggestion, the outcome is logged",
+                "Monthly retraining pass: high-confidence accepted suggestions are added back into the vector store as new documents",
+                "Model quality metrics tracked per customer: estimate acceptance rate, edit distance, time-to-estimate — dashboarded internally for DockMaster product team",
+              ],
+            },
+          ],
+        },
+      },
     },
     {
       id: 2,
@@ -134,6 +258,129 @@ export const FEATURES = [
         ],
         moat: "Aggregate demand signals across 1,000+ marinas create a cross-network intelligence layer. If 50 marinas near a popular regatta route all feed demand data, the predictions for any one of them become dramatically more accurate. No standalone marina and no competitor without this footprint can replicate it.",
       },
+      sections: {
+        stats: {
+          headline: "Stat Justification",
+          items: [
+            {
+              stat: "40–95% transient occupancy variance between peak and off-peak",
+              icon: "📅",
+              justification: "This is directly validated by multiple marina industry sources. Marina Dock Age (industry trade publication) explicitly notes that marinas in northern climates see 100% summer occupancy and well under 50% in winter. SlipMaps data shows transient slip request surges of 50–60% in peak months at major boating destinations like Miami and Fort Lauderdale. A marina appraisal industry analysis specifically calls out that 'fully occupied in Summer is not the same as mostly empty in Winter.' DockMaster's own KPI blog confirms that 56% of marinas report occupancy above 95% — but this is peak-season data, not annualized. The 40% figure for off-peak is conservative; in northern climates with actual winters, off-peak occupancy can be below 20%.",
+              source: "Marina Dock Age (July 2018); SlipMaps seasonal data (2025); Marina Appraisal industry analysis; DockMaster KPI blog (Jan 2026)",
+            },
+            {
+              stat: "15–30% revenue uplift from dynamic pricing",
+              icon: "📈",
+              justification: "This figure is drawn directly from the hotel industry, which is the most mature analogue for fixed-capacity, date-perishable inventory pricing. Multiple 2025–2026 hotel revenue management sources independently cite 15–30% RevPAR (Revenue Per Available Room) uplift as the benchmark for properties switching from flat to dynamic pricing — PriceLabs, WISK, and Mews all cite this range. The marina case is arguably stronger than hotels because marina operators are starting from a lower base of pricing sophistication: most have never attempted demand-based pricing at all, while most hotels at least do high/low seasonal splits. The whitespace is larger. We apply the hotel benchmark conservatively to marinas.",
+              source: "PriceLabs dynamic pricing benchmark (2026); WISK hotel dynamic pricing guide (Feb 2026); Mews dynamic pricing guide (Mar 2026)",
+            },
+            {
+              stat: "Less than 5% of marinas use dynamic pricing today",
+              icon: "🎯",
+              justification: "Marina Dock Age explicitly states: 'Although it isn't used much in the marina space yet, hotels, airlines and ridesharing companies use dynamic pricing.' This was written in 2018, and the situation has not materially changed. Transient booking platforms like Dockwa and Snag-A-Slip have basic seasonal splits but no real-time demand-based pricing. No major marina management software vendor currently offers an AI-driven dynamic pricing engine. This is confirmed by a review of all major competitor products (PacsoftNG, HarbaMaster, Smart Waters, Marina Mate Pro) — none list dynamic pricing as a feature. The less-than-5% figure is a conservative estimate given the absence of any known widespread adoption.",
+              source: "Marina Dock Age (2018); competitor product review (GetApp, Capterra 2025–2026)",
+            },
+          ],
+        },
+        pricing: {
+          headline: "Pricing Justification",
+          intro: "Three-tier structure designed around different operator sophistication levels and a revenue-share option that eliminates the objection entirely.",
+          points: [
+            {
+              label: "$99/month Starter tier",
+              body: "This covers the cost of running the demand forecasting model and serving recommendations. At $99/month, a marina generating even $5,000/month in transient revenue needs to see only a 2% uplift to break even on the tool cost. That is an extremely low bar. The Starter tier is deliberately priced as a conversation-starter — it gets the product in the door at marinas that are skeptical of the ROI claim, lets them see recommendations for 30 days, and creates a natural upgrade path to Autopilot once they see the recommendations are credible.",
+            },
+            {
+              label: "$249/month Autopilot tier",
+              body: "The jump from $99 to $249 is justified by the addition of automated rule-based pricing, which is where the real value is unlocked. Manual approval is labor — it requires someone to log in and click approve every time the model makes a recommendation. Autopilot removes that friction and lets the engine run continuously. $249/month is calibrated against comparable revenue management add-ons in the short-term rental space (PriceLabs for Airbnb hosts charges $19.99/listing/month; a marina with 20 transient slips at that rate would be $400/month — making $249 flat look like a bargain).",
+            },
+            {
+              label: "Revenue share tier (10–15% of incremental revenue)",
+              body: "This is the highest-trust and potentially highest-revenue tier. If a marina generates $200,000/year in transient slip revenue and dynamic pricing delivers a 20% uplift ($40,000 incremental), DockMaster captures $4,000–$6,000/year — far above the flat rate tiers. The revenue share model is modeled after how hotel revenue management companies (like IDeaS) structure enterprise contracts. The key advantage is psychological: it converts a cost center objection into a pure upside conversation. DockMaster only wins when the marina wins. The challenge is instrumentation — you need reliable baseline measurement to calculate incremental revenue accurately, which requires DockMaster to own the reservation and billing data (which it does).",
+            },
+          ],
+        },
+        buildvsbuy: {
+          headline: "Build vs. Buy Assessment",
+          intro: "Rated Medium-High. The forecasting model itself is standard; the complexity is in the data integration, event detection, and the trust-building UI.",
+          dimensions: [
+            {
+              label: "ML Stack: Time-series forecasting (Prophet / XGBoost)",
+              body: "Demand forecasting for fixed-capacity inventory is a solved problem at the algorithm level. The two most production-proven approaches are Facebook Prophet (open-source, excellent for seasonal time series with holiday/event effects) and gradient-boosted trees (XGBoost/LightGBM) with engineered features. Both are appropriate here. The choice depends on the data volume: with fewer than 3 years of history per marina, Prophet's explicit seasonality modeling is preferable; with richer history, XGBoost with feature engineering (day of week, days-until, event proximity, weather) typically wins. In practice, an ensemble of both is standard.",
+            },
+            {
+              label: "Why build, not buy",
+              body: "Hotel revenue management SaaS tools (IDeaS, Duetto, PriceLabs) are purpose-built for hotels and do not integrate with marina management systems. They also operate on room-night inventory logic that does not map cleanly to slip-night inventory (different size classes, utility metering, dry stack vs. wet slip distinctions). Building the engine natively inside DockMaster is the only way to exploit DockMaster's existing reservation and billing data pipeline without an expensive, fragile third-party integration. The model itself is not proprietary — the advantage is the data and the integration.",
+            },
+            {
+              label: "Time to MVP: 10–14 weeks",
+              body: "Weeks 1–3: Data extraction and historical reservation analysis across pilot marina cohort. Feature engineering: day-of-week, days-ahead, event calendar integration, weather API hookup. Weeks 4–7: Model training and backtesting against 2–3 years of actual reservation history. Validation: does the model predict actual peak periods correctly? Weeks 8–10: Pricing recommendation engine — translating demand forecast into a price suggestion with configurable floor/ceiling guardrails. Weeks 11–12: UI build (pricing calendar view, recommendation cards, one-click approve). Weeks 13–14: Revenue share instrumentation — baseline measurement logic, incremental revenue attribution.",
+            },
+            {
+              label: "Build complexity: Medium-High",
+              body: "The elevated complexity vs. F-01 comes from three sources: (1) event detection — integrating external event calendars (regattas, fishing tournaments, boat shows) reliably is harder than it sounds; (2) pricing guardrails — operators need confidence that the engine will not set prices at unreasonable levels, requiring rule-based floors/ceilings and manual override flows; (3) revenue attribution — accurately measuring 'incremental revenue above baseline' for the revenue share tier requires careful instrumentation and is commercially critical to get right.",
+            },
+          ],
+        },
+        implementation: {
+          headline: "Implementation Deep Dive",
+          intro: "End-to-end technical architecture for the pricing engine.",
+          layers: [
+            {
+              label: "Data Layer",
+              icon: "🗄️",
+              items: [
+                "Source: DockMaster reservation system (transient bookings: date, slip size, rate charged, length of stay, check-in/out timestamps)",
+                "External data ingestion: weather forecast API (OpenWeatherMap or NOAA), local marine event calendar scraping or manual input, regional boat show and regatta schedules",
+                "Feature store: pre-computed feature vectors per marina per date — occupancy, days-ahead, seasonal index, event proximity score, rolling 30/90-day demand trend",
+                "Data warehouse: Snowflake or BigQuery for cross-marina aggregation and model training at scale",
+              ],
+            },
+            {
+              label: "Forecasting & Pricing Layer",
+              icon: "🧠",
+              items: [
+                "Demand model: Facebook Prophet for seasonal decomposition + XGBoost for event-feature interactions, ensemble weighted by validation performance per marina",
+                "Forecast output: expected occupancy probability per slip-night for next 90 days, with 80% confidence intervals",
+                "Pricing function: maps forecast occupancy to a recommended rate using a configurable elasticity curve (operator sets their floor rate, ceiling multiplier, and sensitivity preference)",
+                "Event uplift layer: detected events (regattas, holidays, tournaments) apply an additional multiplier to base pricing recommendations",
+                "Model retraining: weekly batch retraining as new reservation data accumulates",
+              ],
+            },
+            {
+              label: "Application Layer",
+              icon: "🖥️",
+              items: [
+                "New 'Pricing' tab in DockMaster Web — calendar heatmap showing forecasted demand and recommended rates per date",
+                "Recommendation cards: each flagged date shows the current rate, suggested rate, and reason ('High demand weekend — fishing tournament detected nearby')",
+                "Manual approval mode (default): one-click approve per recommendation, or bulk approve a date range",
+                "Autopilot mode: operator sets rules ('auto-approve changes up to ±25% of base rate') — engine applies changes automatically",
+                "Price changes push directly to DockMaster's reservation system and any connected transient booking marketplaces (Dockwa, Snag-A-Slip) via API",
+              ],
+            },
+            {
+              label: "Infrastructure",
+              icon: "☁️",
+              items: [
+                "Scheduled batch jobs (AWS EventBridge + Lambda or Airflow) run nightly to refresh forecasts and generate next-day recommendations",
+                "FastAPI microservice serves the recommendations UI; stateless, horizontally scalable",
+                "Weather and event data fetched via daily cron jobs, cached in the feature store",
+                "Revenue attribution service: compares actual nightly rates and occupancy against a rolling baseline (prior 8 weeks, same day-of-week, same season) to calculate incremental revenue for revenue share billing",
+              ],
+            },
+            {
+              label: "Cross-Marina Network Effect",
+              icon: "🌐",
+              items: [
+                "Phase 1 (launch): per-marina models trained on each marina's own history only",
+                "Phase 2 (12+ months): cross-marina demand signals aggregated in Snowflake — demand patterns from marinas near a shared regatta route inform predictions for all nearby marinas",
+                "Network model: a hierarchical Bayesian framework allows per-marina models to borrow strength from the aggregate network, improving forecast accuracy for smaller marinas with limited history",
+                "This network effect compounds with every new DockMaster customer — and is impossible for any competitor without the same data footprint to replicate",
+              ],
+            },
+          ],
+        },
+      },
     },
     {
       id: 3,
@@ -200,6 +447,131 @@ export const FEATURES = [
           "Sales motion: run a free 'benchmark audit' as part of the DockMaster sales process. Show a prospect their estimated performance gap before they sign. Compass justifies itself.",
         ],
         moat: "This is the strongest long-term moat of any feature on this list. The data network compounds: every new DockMaster customer enriches the benchmark for every existing customer. Competitors with 50 customers cannot build what DockMaster can build with 1,000+. This is Glassdoor or ZoomInfo's business model applied to marinas — the data IS the product.",
+      },
+      sections: {
+        stats: {
+          headline: "Stat Justification",
+          items: [
+            {
+              stat: "1,000+ marinas in the DockMaster network with 40+ years of data",
+              icon: "🏛️",
+              justification: "This is stated directly on DockMaster's website and marketing materials and is the foundational asset this entire feature is built on. To put it in context: the marina management software market was valued at $315M in 2024, growing at 10.1% CAGR. DockMaster, founded in the 1980s, is one of the oldest and most established players. Having 1,000+ customers in a market of this size represents significant installed base concentration. Forty-plus years of continuous operational data — work orders, reservations, billing, inventory, financials — across a thousand businesses is an extraordinarily rare dataset. There is no other company in the marina vertical that could build what this feature proposes today.",
+              source: "DockMaster website; Future Market Report marina software market sizing (2024)",
+            },
+            {
+              stat: "~100% of decisions made without benchmarks",
+              icon: "🔍",
+              justification: "This is a qualitative assessment grounded in product research. A review of all major marina management software competitors — PacsoftNG, HarbaMaster, Smart Waters, Marina Master, Harbour Assist — found zero instances of cross-customer benchmarking as a feature. DockMaster's own reporting suite is entirely inward-facing: it shows you your own data with no external reference point. Industry publications (Marina Dock Age, Marina Dock Age) do publish periodic survey-based industry reports, but these are annual snapshots, not real-time, and are not integrated into any operator's day-to-day tooling. The statement is intentionally pointed — it is making an argument about the opportunity, not a measurement claim.",
+              source: "Competitor product review (GetApp, Capterra 2025–2026); DockMaster product documentation",
+            },
+            {
+              stat: "High willingness to pay, especially among multi-location operators",
+              icon: "💰",
+              justification: "This is directional and supported by analogy. In adjacent verticals where cross-customer benchmarking products exist — restaurant analytics (Toast Intelligence), retail analytics (Placer.ai), hospitality (STR benchmarking) — willingness to pay is consistently strong and scales with operator size. Multi-location operators have an internal pain point that pure benchmarking solves even before the external comparison is considered: they cannot easily compare Location A vs. Location B vs. Location C without a tool like this. The revenue intelligence SaaS market (Clari, Gong, 6sense) has demonstrated that buyers pay $79–$250+/user/month for cross-company intelligence. The marina version of this, at $199–$499/month flat, is significantly cheaper than enterprise analogues.",
+              source: "Revenue intelligence platform pricing benchmarks (2026); hospitality benchmarking analogues (STR)",
+            },
+          ],
+        },
+        pricing: {
+          headline: "Pricing Justification",
+          intro: "Pricing is anchored to the value of strategic decisions made better, not operational time saved — a fundamentally different value proposition than F-01 and F-03.",
+          points: [
+            {
+              label: "$199/month Compass Essential",
+              body: "This tier is priced to be justifiable on a single better decision per year. If a marina operator looks at their benchmarks and realizes their transient pricing is 15% below the regional median — and adjusts accordingly — the revenue upside on even a modest transient operation ($150K/year) is $22,500. At $199/month ($2,388/year), the payback period is about 5 weeks of the corrected pricing. The entry price is also calibrated to minimize approval friction: $199/month is within the 'software subscription' budget of most operators without requiring a capital expenditure approval process.",
+            },
+            {
+              label: "$499/month Compass Pro",
+              body: "The step up to Pro is justified by real-time benchmarks and AI-generated playbooks — the difference between knowing you have a problem and knowing specifically what to do about it. This tier is modeled on business intelligence platforms in adjacent verticals. For context, Tableau starts at $70/user/month, and a marina with a 3-person management team would pay $210/month for basic BI — with no industry-specific benchmarks and no AI analysis. At $499/month, Compass Pro competes favorably with general-purpose BI tools while delivering dramatically more specific and actionable intelligence.",
+            },
+            {
+              label: "Standalone subscription for non-DockMaster customers",
+              body: "This is the highest-margin pricing opportunity: selling Compass access to marina operators who do NOT currently use DockMaster, with their own operational data entered manually or via flat-file import. At $199–$499/month, these customers generate pure data licensing revenue with no incremental service delivery cost. More importantly, once they are in the Compass network, the DockMaster sales team has a warm lead who already sees the value of DockMaster's data network and can be converted to the full platform.",
+            },
+          ],
+        },
+        buildvsbuy: {
+          headline: "Build vs. Buy Assessment",
+          intro: "Rated High complexity — not because the technology is hard, but because the data governance, privacy, and anonymization layer is commercially and legally critical.",
+          dimensions: [
+            {
+              label: "No off-the-shelf solution fits",
+              body: "General-purpose BI tools (Tableau, Looker, Power BI) can display data but have no marina-specific data model, no cross-customer aggregation capability, and no AI analysis layer. Revenue intelligence platforms (Gong, Clari) are designed for B2B sales pipelines, not marina operations. Hospitality benchmarking tools (STR for hotels) are the closest conceptual analogue, but they are built on hotel-specific data models and would require full rebuilds to work with marina data structures. This must be built internally — and only DockMaster has the data to build it.",
+            },
+            {
+              label: "The critical build challenge: privacy-preserving aggregation",
+              body: "The single most important engineering investment is the anonymization and aggregation layer. Customers must be certain that competitors cannot see their raw data. The architecture requires: (1) k-anonymity guarantees — a marina's metrics are only included in a benchmark cohort if that cohort has at least k members (typically k=5–10), preventing reverse-identification; (2) differential privacy — statistical noise is added to aggregate outputs to prevent inference attacks; (3) clear contractual language in DockMaster's updated ToS about how data is used for benchmarking. Getting this wrong would be a catastrophic trust failure. This is the highest-complexity component of the build.",
+            },
+            {
+              label: "Time to MVP: 12–16 weeks",
+              body: "Weeks 1–4: Data schema mapping — translating DockMaster's existing operational data model into a standardized KPI taxonomy (revenue per slip, occupancy rate, service turnaround, technician utilization, DSO). Privacy layer design and legal review of ToS changes. Weeks 5–8: Aggregation pipeline build — anonymized cohort construction, k-anonymity enforcement, benchmark computation jobs (Snowflake or BigQuery). Weeks 9–12: LLM analysis layer — prompt engineering to generate gap explanations and playbooks from benchmark data. UI build: KPI cards, peer comparison charts, AI narrative panel. Weeks 13–16: Internal testing with volunteer beta customers, privacy audit, soft launch.",
+            },
+            {
+              label: "Build complexity: High",
+              body: "Four independent complexity drivers: (1) Privacy architecture — non-negotiable, legally sensitive, must be done by someone with data privacy engineering experience. (2) Data normalization — 1,000 customers across 40 years means enormous variation in data completeness and schema consistency; substantial data engineering is required before benchmarks are meaningful. (3) Segmentation logic — a 20-slip seasonal marina in Michigan is not a useful peer for a 200-slip year-round Florida marina; getting segmentation right is critical for benchmark credibility. (4) AI narrative quality — the playbook generation has to be specific and actionable, not generic, or operators will dismiss it.",
+            },
+          ],
+        },
+        implementation: {
+          headline: "Implementation Deep Dive",
+          intro: "The most architecturally complex of the three features. Two distinct sub-systems: a data pipeline and a product UI.",
+          layers: [
+            {
+              label: "Data Pipeline Layer",
+              icon: "🗄️",
+              items: [
+                "Source: DockMaster's existing operational database — all modules (reservations, work orders, billing, inventory, payroll)",
+                "Nightly ETL jobs extract anonymized, aggregated KPIs per customer into a centralized data warehouse (Snowflake recommended for its data sharing and governance features)",
+                "KPI computation layer: standardized definitions for each benchmark metric, computed consistently across all customers regardless of their DockMaster module configuration",
+                "Segmentation engine: classifies each marina by slip count, geography (coastal/inland/Great Lakes), business type (full-service/dry stack/yacht club), seasonality (year-round/seasonal), and revenue band",
+                "Cohort construction: for each KPI, computes peer group statistics (median, 25th/75th percentile, top-decile) with k-anonymity enforcement — minimum 5 peers required per cohort",
+              ],
+            },
+            {
+              label: "Privacy & Governance Layer",
+              icon: "🔒",
+              items: [
+                "All customer data is anonymized before entering the shared warehouse — customer name, location, and identifying attributes are hashed or removed",
+                "Differential privacy: Laplace noise is added to published aggregate statistics to prevent inference attacks on small cohorts",
+                "Access controls: each customer can only query their own raw data; benchmark outputs are pre-computed aggregates, never raw peer data",
+                "Legal: updated ToS with explicit consent for anonymized benchmarking data use; opt-out option available (but significantly degrades benchmark quality for that customer — communicated transparently)",
+                "Annual privacy audit by external firm — results published to build customer trust",
+              ],
+            },
+            {
+              label: "AI Analysis Layer",
+              icon: "🧠",
+              items: [
+                "LLM (Claude 3.5 Sonnet) receives: a structured JSON object containing a customer's KPIs, their peer median, and the delta for each metric",
+                "System prompt engineering: the model is instructed to generate specific, operational explanations for gaps — not generic observations",
+                "Playbook generation: for each significant negative delta, the model generates a 3-step action recommendation drawn from patterns observed in top-quartile performers (e.g., 'Top-quartile shops with your service mix pre-order parts 5 days before scheduled work — your current lead time is 2 days')",
+                "Trend alert system: a separate scheduled job monitors each customer's KPIs for statistically significant negative trends (2+ standard deviations from their own baseline) and triggers an automated alert with AI-generated explanation",
+              ],
+            },
+            {
+              label: "Application Layer",
+              icon: "🖥️",
+              items: [
+                "Standalone 'Compass' section in DockMaster Web — separate navigation tab, distinct visual identity",
+                "Dashboard: KPI scorecard with peer comparison bars (your number vs. median vs. top quartile), color-coded by performance",
+                "Drill-down: each KPI card expands to show trend over time, cohort distribution chart, and AI-generated explanation",
+                "Playbook panel: ranked list of recommended actions, each with estimated impact and implementation steps",
+                "Exportable PDF report for sharing with investors, lenders, or marina group leadership",
+              ],
+            },
+            {
+              label: "Infrastructure",
+              icon: "☁️",
+              items: [
+                "Snowflake as the central data warehouse — its data sharing architecture is ideal for multi-tenant anonymized aggregation",
+                "Airflow (or AWS MWAA) for orchestrating nightly ETL and benchmark computation jobs",
+                "FastAPI backend serving KPI and benchmark data to the UI; Redis cache for frequently-accessed cohort statistics",
+                "LLM calls batched nightly for playbook generation (not real-time) — results cached until next nightly run",
+                "Estimated infrastructure cost at launch (1,000 customers): $3,000–$5,000/month in Snowflake + compute costs — easily covered at $199+ ARPU",
+              ],
+            },
+          ],
+        },
       },
     },
 ];
