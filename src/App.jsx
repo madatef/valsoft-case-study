@@ -62,7 +62,7 @@ function App() {
               transition: "all 0.2s",
             }}
           >
-            📊 Main View
+            ✨ Features
           </button>
           <button
             onClick={() => setPage('deepdive')}
@@ -94,7 +94,7 @@ function App() {
               transition: "all 0.2s",
             }}
           >
-            📚 References
+            🌐 References
           </button>
           <button
             onClick={() => setPage('qna')}
@@ -108,10 +108,9 @@ function App() {
               fontWeight: 700,
               color: page === 'qna' ? "#F59E0B" : "#475569",
               transition: "all 0.2s",
-              display: 'none',
             }}
           >
-            ❓ Q&A
+            🗪 Q&A
           </button>
         </div>
       </div>
