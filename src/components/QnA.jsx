@@ -21,7 +21,7 @@ const QnA = () => {
           alignItems: "center",
           gap: 12
         }}>
-          ❓ Q&A
+          🗪 Q&A
         </h1>
 
         <p style={{
@@ -30,7 +30,7 @@ const QnA = () => {
           marginBottom: 32,
           maxWidth: 800
         }}>
-          Frequently asked questions about the DockMaster AI feature analysis and implementation strategy.
+          Likely questions and their answers
         </p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
